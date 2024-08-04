@@ -1,4 +1,3 @@
-import math
 import tkinter as tk
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2Tk
@@ -10,6 +9,8 @@ from triclinic import Transpression, Transtension
 # construct the window object
 window = tk.Tk()
 
+shear_zone_strike = tk.DoubleVar()
+shear_zone_dip = tk.DoubleVar()
 gamma_epsilon = tk.DoubleVar()
 phi = tk.DoubleVar()
 use_transpression = tk.BooleanVar()
@@ -37,7 +38,7 @@ def update_stereonet(stereonet, canvas, time_step=0.1, end_time=10):
         marker="o",
         linewidth=0.3,
         edgecolors="black",
-        label="$\lambda_1$: Lineation",
+        label=r"$\lambda_1$: Lineation",
     )
     stereonet.plot_lines(
         normal_trd,
@@ -46,7 +47,7 @@ def update_stereonet(stereonet, canvas, time_step=0.1, end_time=10):
         marker="^",
         linewidth=0.3,
         edgecolors="black",
-        label="$\lambda_3$: Foliation pole",
+        label=r"$\lambda_3$: Foliation pole",
     )
 
     ax.legend(loc="upper right")
@@ -87,7 +88,7 @@ ge_slider = tk.Scale(
     to=20.0,
     resolution=0.01,
     variable=gamma_epsilon,
-    command=lambda x: update_stereonet(stnet, canvas),
+    command=lambda x : update_stereonet(stnet, canvas),
     label = "gamma/epsilon"
 )
 ge_slider.pack()
